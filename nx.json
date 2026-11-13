@@ -111,5 +111,6 @@
     "@nx/angular:resolver": {
       "typeSeparator": "."
     }
-  }
+  },
+  "analytics": false
 }
