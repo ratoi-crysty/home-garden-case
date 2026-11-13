@@ -3,7 +3,7 @@ import {
   createGardenSchema,
   gardenResponseSchema,
   updateGardenSchema,
-} from '@itp-home-garden/schemas';
+} from '@itp-home-garden/gardens-schema';
 
 export type CreateGardenRequest = z.infer<typeof createGardenSchema>;
 export type UpdateGardenRequest = z.infer<typeof updateGardenSchema>;

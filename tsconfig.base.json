@@ -20,7 +20,11 @@
     "target": "es2022",
     "paths": {
       "@itp-home-garden/api-interfaces": ["libs/api-interfaces/src/index.ts"],
-      "@itp-home-garden/schemas": ["libs/schemas/src/index.ts"]
+      "@itp-home-garden/schemas": ["libs/schemas/src/index.ts"],
+      "@itp-home-garden/gardens-web": ["libs/gardens/web/src/index.ts"],
+      "@itp-home-garden/gardens-schema": ["libs/gardens/schemas/src/index.ts"],
+      "@itp-home-garden/gardens-types": ["libs/gardens/types/src/index.ts"],
+      "@itp-home-garden/api-web": ["libs/api-web/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
