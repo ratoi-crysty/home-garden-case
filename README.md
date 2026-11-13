@@ -31,6 +31,7 @@ npx nx g @nx/remix:app apps/web
 ```
 
 After installation, you can run the web application using:
+
 ```sh
 npx nx dev web
 ```

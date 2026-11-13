@@ -32,8 +32,10 @@ export type Garden = Selectable<GardenTable>;
 export type NewGarden = Insertable<GardenTable>;
 export type GardenUpdate = Updateable<GardenTable>;
 
-export interface PlantTable
-  extends Omit<PlantModel, 'plantId' | 'plantationDate' | 'createdAt' | 'updatedAt'> {
+export interface PlantTable extends Omit<
+  PlantModel,
+  'plantId' | 'plantationDate' | 'createdAt' | 'updatedAt'
+> {
   plantId: Generated<PlantModel['plantId']>;
   plantationDate: ColumnType<Date, PlantModel['plantationDate'], never>;
   createdAt: ColumnType<Date, PlantModel['createdAt'], never>;

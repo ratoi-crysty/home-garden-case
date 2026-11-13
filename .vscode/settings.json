@@ -1,10 +1,5 @@
 {
-  "cSpell.words": [
-    "Awilix",
-    "ilike",
-    "kysely",
-    "Updateable"
-  ],
+  "cSpell.words": ["Awilix", "ilike", "kysely", "Updateable"],
   "editor.codeActionsOnSave": {
     "source.organizeImports": "always",
     "source.fixAll": "explicit"
