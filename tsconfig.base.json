@@ -25,7 +25,11 @@
       "@itp-home-garden/gardens-schema": ["libs/gardens/schemas/src/index.ts"],
       "@itp-home-garden/gardens-types": ["libs/gardens/types/src/index.ts"],
       "@itp-home-garden/api-web": ["libs/api-web/src/index.ts"]
-    }
+    },
+    "noUncheckedSideEffectImports": false,
+    "types": ["*"],
+    "esModuleInterop": false,
+    "ignoreDeprecations": "6.0"
   },
   "exclude": ["node_modules", "tmp"]
 }
