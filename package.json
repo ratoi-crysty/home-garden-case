@@ -55,6 +55,7 @@
     "@nx/vitest": "23.3.2",
     "@nx/web": "23.3.2",
     "@nx/workspace": "23.3.2",
+    "@oxc-project/runtime": "^0.115.0",
     "@playwright/test": "^1.36.0",
     "@rspack/cli": "^2.3.2",
     "@rspack/core": "2.3.2",
