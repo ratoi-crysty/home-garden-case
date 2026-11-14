@@ -25,6 +25,9 @@ export default createConfig(
   {
     production: {
       options: {
+        fileReplacements: [
+          { replace: './environments/environment.ts', with: 'environments/environment.prod.ts' },
+        ],
         budgets: [
           {
             type: 'initial',
