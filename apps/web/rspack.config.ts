@@ -20,6 +20,11 @@ export default createConfig(
         },
       ],
       styles: ['./src/styles.scss'],
+      // Workaround: @nx/angular-rspack's Sass importer can't resolve package
+      // stylesheets (e.g. `@use '@angular/material'`) under @rspack/core 2.x.
+      stylePreprocessorOptions: {
+        includePaths: ['../../node_modules'],
+      },
     },
   },
   {
