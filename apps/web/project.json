@@ -12,9 +12,6 @@
         "buildTarget": "web:build"
       }
     },
-    "lint": {
-      "executor": "@nx/eslint:lint"
-    },
     "serve-static": {
       "continuous": true,
       "executor": "@nx/web:file-server",
@@ -22,7 +19,11 @@
         "buildTarget": "web:build",
         "port": 4200,
         "spa": true
-      }
+      },
+      "readyWhen": {
+        "signal": true
+      },
+      "dependsOn": ["build"]
     }
   }
 }
