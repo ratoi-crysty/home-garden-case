@@ -3,6 +3,7 @@ import { BehaviorSubject, catchError, EMPTY, filter, Observable, switchMap, tap 
 import { ApiSwrService } from '../swr/api-swr.service';
 import { SwrCacheDuration, SwrEntry } from '../swr/api-swr.types';
 import { LoggerService } from '../../log/logger.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable()
 export abstract class ApiStoreService<T, R> {
@@ -10,6 +11,7 @@ export abstract class ApiStoreService<T, R> {
   protected readonly data = new BehaviorSubject<T | undefined>(undefined);
   protected readonly apiSwr = inject(ApiSwrService);
   protected readonly logger = inject(LoggerService);
+  protected readonly snackBar = inject(MatSnackBar);
 
   getData(): Observable<T> {
     return this.data.pipe(filter((data: T | undefined): data is T => !!data));
@@ -33,6 +35,15 @@ export abstract class ApiStoreService<T, R> {
               this.logger.error('Failed to fetch cache', err);
 
               if (entry) {
+                const snackBarRef = this.snackBar.open(this.getStaleWarnMessage(), 'Retry', {
+                  duration: 5_000,
+                  panelClass: 'error',
+                  verticalPosition: 'top',
+                });
+
+                snackBarRef.onAction().subscribe(() => {
+                  this.load(req);
+                });
                 // TODO: Display toastr warning
               } else {
                 this.data.error(err);
@@ -64,6 +75,10 @@ export abstract class ApiStoreService<T, R> {
       freshFor: 30_000,
       maxStaleFor: 60_000 * 5,
     };
+  }
+
+  protected getStaleWarnMessage(): string {
+    return 'Could not fetch new data, served stale';
   }
 
   protected abstract getCacheKey(req: R): string;
