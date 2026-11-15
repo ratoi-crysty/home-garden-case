@@ -4,7 +4,7 @@ import {
   provideZoneChangeDetection,
   Type,
 } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { PreloadAllModules, provideRouter, withPreloading } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { environment } from '../../environments/environment';
@@ -37,6 +37,6 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptors([retryInterceptor])),
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(appRoutes),
+    provideRouter(appRoutes, withPreloading(PreloadAllModules)),
   ],
 };

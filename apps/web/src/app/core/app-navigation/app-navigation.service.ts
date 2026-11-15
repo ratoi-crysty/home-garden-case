@@ -14,7 +14,7 @@ export class AppNavigationService implements CommonNavigation, GardenNavigation,
     return ['/broken'];
   }
   gardenList(): string[] {
-    return ['/gardens'];
+    return ['/'];
   }
   gardenItem(gardenId: string): string[] {
     return ['/gardens', gardenId];

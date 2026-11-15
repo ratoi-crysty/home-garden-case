@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { AppShellComponent } from './core/components/app-shell/app-shell.component';
+import { AppNavigationService } from './core/app-navigation/app-navigation.service';
 
 @Component({
   imports: [RouterOutlet, AppShellComponent],
@@ -9,5 +10,8 @@ import { AppShellComponent } from './core/components/app-shell/app-shell.compone
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  protected readonly navItems = [{ label: 'Gardens', link: '/gardens', icon: 'yard' }];
+  protected navigation = inject(AppNavigationService);
+  protected readonly navItems = [
+    { label: 'Gardens', link: this.navigation.gardenList().join('/'), icon: 'yard' },
+  ];
 }
