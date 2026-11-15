@@ -2,6 +2,8 @@ import { Route } from '@angular/router';
 import { GardenListPageComponent } from './pages/garden-list/garden-list-page.component';
 import { gardenListResolver } from './modules/garden/resolvers/garden-list.resolver';
 import { GardenListStoreService } from './modules/garden/stores/list/garden-list-store.service';
+import { BrokenPageComponent } from './core/pages/broken/broken-page.component';
+import { NotFoundComponent } from './core/pages/not-found/not-found.component';
 
 export const appRoutes: Route[] = [
   {
@@ -20,22 +22,15 @@ export const appRoutes: Route[] = [
   {
     path: 'not-found',
     pathMatch: 'full',
-    loadComponent: () =>
-      import('./core/pages/not-found/not-found.component').then(
-        ({ NotFoundComponent }) => NotFoundComponent,
-      ),
+    component: NotFoundComponent,
   },
   {
     path: 'broken',
     pathMatch: 'full',
-    loadComponent: () =>
-      import('./core/pages/broken/broken-page.component').then(
-        ({ BrokenPageComponent }) => BrokenPageComponent,
-      ),
+    component: BrokenPageComponent,
   },
   {
     path: '**',
-    pathMatch: 'full',
     redirectTo: '/not-found',
   },
 ];

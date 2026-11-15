@@ -5,6 +5,7 @@ import { gardenItemResolver } from '../modules/garden/resolvers/garden-item.reso
 import { plantListResolver } from '../modules/plant/resolvers/plant-list.resolver';
 
 export const routes: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: '/' },
   {
     path: ':id',
     pathMatch: 'full',
@@ -17,10 +18,5 @@ export const routes: Routes = [
       garden: gardenItemResolver,
       plantList: plantListResolver,
     },
-  },
-  {
-    path: '**',
-    pathMatch: 'full',
-    redirectTo: '/not-found',
   },
 ];
