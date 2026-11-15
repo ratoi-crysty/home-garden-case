@@ -1,10 +1,11 @@
 import { Component, input, output } from '@angular/core';
 
 import { GardenModel } from '@itp-home-garden/api-interfaces';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-garden-list-item',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './garden-list-item.component.html',
   styleUrl: './garden-list-item.component.scss',
 })

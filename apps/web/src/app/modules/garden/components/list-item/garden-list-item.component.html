@@ -1,13 +1,6 @@
-<div>Name: {{ garden().gardenName }}</div>
-<div>TotalSurfaceArea: {{ garden().totalSurfaceArea }}</div>
-<div>Longitude: {{ garden().longitude }}</div>
-<div>Latitude: {{ garden().latitude }}</div>
-<div>CreatedAt: {{ garden().createdAt }}</div>
-<div>UpdatedAt: {{ garden().updatedAt }}</div>
-<div>LocationDescription: {{ garden().locationDescription }}</div>
-<div>
+<div class="name"><a [routerLink]="[garden().gardenId]">{{ garden().gardenName }}</a></div>
+<div class="actions-container">
   <button (click)="handleRemove()">Delete</button>
-</div>
-<div>
   <button (click)="handleUpdate()">Update</button>
+
 </div>
