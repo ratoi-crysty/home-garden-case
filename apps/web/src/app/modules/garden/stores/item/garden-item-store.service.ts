@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class GardenItemStoreService extends ApiStoreService<GardenModel, number> {
-  protected override name = 'garden-list';
+  protected override name = 'garden-item';
   protected readonly gardensService = inject(GardenApiService);
 
   protected override getCacheKey(id: number): string {

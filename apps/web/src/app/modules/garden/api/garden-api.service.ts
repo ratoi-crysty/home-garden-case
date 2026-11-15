@@ -15,6 +15,5 @@ export class GardenApiService extends CrudApiService<
   UpdateGardenRequest,
   number
 > {
-  protected readonly name = 'gardens';
   protected override readonly basePath = 'gardens';
 }

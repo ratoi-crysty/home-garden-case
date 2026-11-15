@@ -8,10 +8,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Injectable()
 export abstract class ApiStoreService<T, R> {
   protected abstract readonly name: string;
-  protected readonly data = new BehaviorSubject<T | undefined>(undefined);
+  protected data = new BehaviorSubject<T | undefined>(undefined);
   protected readonly apiSwr = inject(ApiSwrService);
   protected readonly logger = inject(LoggerService);
   protected readonly snackBar = inject(MatSnackBar);
+
+  reset() {
+    this.data = new BehaviorSubject<T | undefined>(undefined);
+  }
 
   getData(): Observable<T> {
     return this.data.pipe(filter((data: T | undefined): data is T => !!data));
