@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { GardenListPageComponent } from './modules/garden/pages/list/garden-list-page.component';
+import { GardenListPageComponent } from './pages/garden-list/garden-list-page.component';
 import {
   GARDEN_LIST_RESOLVER_REDIRECT,
   gardenListResolver,
@@ -66,7 +66,7 @@ export const appRoutes: Route[] = [
           },
         ],
         loadComponent: () =>
-          import('./modules/garden/pages/item/garden-item-page.component').then(
+          import('./pages/garden-item/garden-item-page.component').then(
             ({ GardenItemPageComponent }) => GardenItemPageComponent,
           ),
         resolve: {

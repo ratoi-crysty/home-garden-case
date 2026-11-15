@@ -3,14 +3,14 @@ import { provideRouter } from '@angular/router';
 import { of } from 'rxjs';
 import { GardenModel } from '@itp-home-garden/api-interfaces';
 import { GardenItemPageComponent } from './garden-item-page.component';
-import { GARDEN_NAVIGATION, GardenNavigation } from '../../garden.navigation';
-import { GardenItemStoreService } from '../../stores/item/garden-item-store.service';
+import { GARDEN_NAVIGATION, GardenNavigation } from '../../modules/garden/garden.navigation';
+import { GardenItemStoreService } from '../../modules/garden/stores/item/garden-item-store.service';
 
 const mockedNavigation: GardenNavigation = {
-  gardenList: () => '/gardens',
-  gardenItem: (id: string) => `/gardens/${id}`,
-  broken: () => '/broken',
-  notFound: () => `/notFound`,
+  gardenList: () => ['/gardens'],
+  gardenItem: (id: string) => ['/gardens', id],
+  broken: () => ['/broken'],
+  notFound: () => [`/notFound`],
 };
 
 describe('GardenItemPageComponent', () => {

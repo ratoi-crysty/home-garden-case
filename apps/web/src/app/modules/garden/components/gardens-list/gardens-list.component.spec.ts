@@ -6,10 +6,10 @@ import { GARDEN_NAVIGATION, GardenNavigation } from '../../garden.navigation';
 import { TokenType } from '../../../../shared/injection/injection.types';
 
 const mockedNavigation: GardenNavigation = {
-  gardenList: () => '/gardens',
+  gardenList: () => ['/gardens'],
   gardenItem: (id: string) => ['/gardens', id],
-  broken: () => '/broken',
-  notFound: () => '/not-found',
+  broken: () => ['/broken'],
+  notFound: () => [`/notFound`],
 };
 
 const createGarden = (gardenId: number, gardenName: string): GardenModel => ({

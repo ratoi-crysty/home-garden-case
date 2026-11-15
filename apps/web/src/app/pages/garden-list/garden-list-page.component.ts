@@ -7,18 +7,18 @@ import {
   Signal,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { GardenFormComponent } from '../../components/garden-form/garden-form.component';
+import { GardenFormComponent } from '../../modules/garden/components/garden-form/garden-form.component';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { catchError, EMPTY, merge, Observable, of, switchMap, tap } from 'rxjs';
 import { CreateGardenRequest, GardenModel } from '@itp-home-garden/api-interfaces';
-import { PageLayoutComponent } from '../../../../shared/ui';
-import { GardensListComponent } from '../../components/gardens-list/gardens-list.component';
-import { GardenListStoreService } from '../../stores/list/garden-list-store.service';
-import { ApiSwrService } from '../../../../shared/api/swr/api-swr.service';
-import { GardenApiService } from '../../api/garden-api.service';
-import { LoggerService } from '../../../../shared/log/logger.service';
+import { PageLayoutComponent } from '../../shared/ui';
+import { GardensListComponent } from '../../modules/garden/components/gardens-list/gardens-list.component';
+import { GardenListStoreService } from '../../modules/garden/stores/list/garden-list-store.service';
+import { ApiSwrService } from '../../shared/api/swr/api-swr.service';
+import { GardenApiService } from '../../modules/garden/api/garden-api.service';
+import { LoggerService } from '../../shared/log/logger.service';
 
 @Component({
   selector: 'app-garden-list-page',

@@ -4,11 +4,11 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideRouter } from '@angular/router';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { GardenModel } from '@itp-home-garden/api-interfaces';
-import { GardenListStoreService } from '../../stores/list/garden-list-store.service';
-import { API_BASE_PATH } from '../../../../shared/api/api.const';
-import { GARDEN_NAVIGATION, GardenNavigation } from '../../garden.navigation';
+import { GardenListStoreService } from '../../modules/garden/stores/list/garden-list-store.service';
+import { API_BASE_PATH } from '../../shared/api/api.const';
+import { GARDEN_NAVIGATION, GardenNavigation } from '../../modules/garden/garden.navigation';
 import { GardenListPageComponent } from './garden-list-page.component';
-import { TokenType } from '../../../../shared/injection/injection.types';
+import { TokenType } from '../../shared/injection/injection.types';
 
 const mockedNavigation: GardenNavigation = {
   gardenList: () => ['/gardens'],
