@@ -1,0 +1,2 @@
+npm exec nx format:check
+npm exec nx affected -- -t lint,typecheck,test --no-tui
