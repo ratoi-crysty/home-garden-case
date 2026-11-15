@@ -1,9 +1,9 @@
 import { ActivatedRouteSnapshot, RedirectCommand, ResolveFn, Router } from '@angular/router';
 import { inject, InjectionToken } from '@angular/core';
 import { GardenModel } from '@itp-home-garden/api-interfaces';
-import { GardensService } from '../services/gardens-service';
 import { catchError, of } from 'rxjs';
 import { LoggerService } from '../../../shared/log/logger.service';
+import { GardenItemStoreService } from '../stores/item/garden-item-store.service';
 
 export const GARDEN_ITEM_RESOLVER_REDIRECT = new InjectionToken<string>(
   'garden.item-resolver-redirect',
@@ -14,7 +14,7 @@ export const GARDEN_ITEM_RESOLVER_REDIRECT = new InjectionToken<string>(
 );
 
 export const gardenItemResolver: ResolveFn<GardenModel> = (route: ActivatedRouteSnapshot) => {
-  const gardensStore = inject(GardensService);
+  const store = inject(GardenItemStoreService);
   const router = inject(Router);
   const logger = inject(LoggerService);
   const redirectPath: string = inject(GARDEN_ITEM_RESOLVER_REDIRECT);
@@ -28,7 +28,9 @@ export const gardenItemResolver: ResolveFn<GardenModel> = (route: ActivatedRoute
     return backCommand;
   }
 
-  return gardensStore.getById(id).pipe(
+  store.load(id);
+
+  return store.getData().pipe(
     catchError(() => {
       logger.error('Failed to get garden item', { id, redirectPath }, 'GardenItemResolver');
       return of(backCommand);

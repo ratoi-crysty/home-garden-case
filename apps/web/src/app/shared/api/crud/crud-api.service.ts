@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { API_BASE_PATH } from './api.const';
+import { API_BASE_PATH } from '../api.const';
 
 @Injectable({
   providedIn: 'root',
@@ -13,23 +13,39 @@ export abstract class CrudApiService<T, TC, TU, K extends string | number> {
   protected readonly http = inject(HttpClient);
 
   getAll(): Observable<T[]> {
-    return this.http.get<T[]>(this.buildUrl());
+    return this.http.get<T[]>(this.getAllUrl());
   }
 
   getById(id: K): Observable<T> {
-    return this.http.get<T>(this.buildUrl(id.toString()));
+    return this.http.get<T>(this.getByIdUrl(id));
   }
 
   create(details: TC): Observable<T> {
-    return this.http.post<T>(this.buildUrl(), details);
+    return this.http.post<T>(this.getCreateUrl(), details);
   }
 
   update(id: K, details: TU): Observable<T> {
-    return this.http.put<T>(this.buildUrl(id.toString()), details);
+    return this.http.put<T>(this.getUpdateUrl(id), details);
   }
 
   remove(id: K): Observable<undefined> {
     return this.http.delete<undefined>(this.buildUrl(id.toString()));
+  }
+
+  getAllUrl() {
+    return this.buildUrl();
+  }
+
+  getByIdUrl(id: K) {
+    return this.buildUrl(id.toString());
+  }
+
+  getCreateUrl(): string {
+    return this.buildUrl();
+  }
+
+  getUpdateUrl(id: K): string {
+    return this.buildUrl(id.toString());
   }
 
   protected buildUrl(path = ''): string {

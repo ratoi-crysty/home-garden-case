@@ -1,9 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ActivatedRoute, provideRouter } from '@angular/router';
+import { provideRouter } from '@angular/router';
 import { of } from 'rxjs';
 import { GardenModel } from '@itp-home-garden/api-interfaces';
 import { GardenItemPageComponent } from './garden-item-page.component';
 import { GARDEN_NAVIGATION, GardenNavigation } from '../../garden.navigation';
+import { GardenItemStoreService } from '../../stores/item/garden-item-store.service';
 
 const mockedNavigation: GardenNavigation = {
   gardenList: () => '/gardens',
@@ -34,7 +35,10 @@ describe('GardenItemPageComponent', () => {
           provide: GARDEN_NAVIGATION,
           useValue: mockedNavigation,
         },
-        { provide: ActivatedRoute, useValue: { data: of({ garden }) } },
+        {
+          provide: GardenItemStoreService,
+          useValue: { getData: () => of(garden) } satisfies Partial<GardenItemStoreService>,
+        },
       ],
     }).compileComponents();
 

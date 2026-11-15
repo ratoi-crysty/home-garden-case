@@ -1,17 +1,11 @@
-import { Injectable } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { API_BASE_PATH } from './api.const';
-import { CrudApiService } from './crud-api.service';
+import { API_BASE_PATH } from '../../../../shared/api/api.const';
+import { GardenItemStoreService } from './garden-item-store.service';
 
-@Injectable()
-class TestCrudApiService extends CrudApiService<unknown, unknown, unknown, number> {
-  protected override readonly basePath = 'items';
-}
-
-describe('CrudApiService', () => {
-  let service: TestCrudApiService;
+describe('GardenItemStoreService', () => {
+  let service: GardenItemStoreService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -19,10 +13,10 @@ describe('CrudApiService', () => {
         provideHttpClient(),
         provideHttpClientTesting(),
         { provide: API_BASE_PATH, useValue: '/api' },
-        TestCrudApiService,
+        GardenItemStoreService,
       ],
     });
-    service = TestBed.inject(TestCrudApiService);
+    service = TestBed.inject(GardenItemStoreService);
   });
 
   it('should be created', () => {

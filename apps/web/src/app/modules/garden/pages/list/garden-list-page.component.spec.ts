@@ -1,48 +1,53 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideRouter } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { GardenModel } from '@itp-home-garden/api-interfaces';
-import { GardensListStore } from '../../stores/gardens-list.store';
+import { GardenListStoreService } from '../../stores/list/garden-list-store.service';
+import { API_BASE_PATH } from '../../../../shared/api/api.const';
 import { GARDEN_NAVIGATION, GardenNavigation } from '../../garden.navigation';
 import { GardenListPageComponent } from './garden-list-page.component';
 import { TokenType } from '../../../../shared/injection/injection.types';
 
 const mockedNavigation: GardenNavigation = {
-  gardenList: () => '/gardens',
-  gardenItem: (id: string) => `/gardens/${id}`,
-  broken: () => '/broken',
-  notFound: () => `/notFound`,
+  gardenList: () => ['/gardens'],
+  gardenItem: (id: string) => ['/gardens', id],
+  broken: () => ['/broken'],
+  notFound: () => [`/notFound`],
 };
 
-class GardensListStoreStub implements Partial<GardensListStore> {
+class GardenListStoreStub implements Partial<GardenListStoreService> {
   readonly data$ = new BehaviorSubject<GardenModel[]>([]);
-  readonly loading$ = new BehaviorSubject<boolean>(false);
 
   getData(): Observable<GardenModel[]> {
     return this.data$;
   }
 
-  getIsLoading(): Observable<boolean> {
-    return this.loading$;
+  refreshData(): Observable<void> {
+    return of(undefined);
   }
 }
 
 describe('GardenListPageComponent', () => {
   let fixture: ComponentFixture<GardenListPageComponent>;
-  let store: GardensListStoreStub;
+  let store: GardenListStoreStub;
 
   beforeEach(async () => {
-    store = new GardensListStoreStub();
+    store = new GardenListStoreStub();
 
     await TestBed.configureTestingModule({
       imports: [GardenListPageComponent],
       providers: [
         provideRouter([]),
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        { provide: API_BASE_PATH, useValue: '/api' },
         {
           provide: GARDEN_NAVIGATION,
           useValue: mockedNavigation satisfies TokenType<typeof GARDEN_NAVIGATION>,
         },
-        { provide: GardensListStore, useValue: store },
+        { provide: GardenListStoreService, useValue: store },
       ],
     }).compileComponents();
 

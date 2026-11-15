@@ -1,5 +1,4 @@
 import { Route } from '@angular/router';
-import { GardensListStore } from './modules/garden/stores/gardens-list.store';
 import { GardenListPageComponent } from './modules/garden/pages/list/garden-list-page.component';
 import {
   GARDEN_LIST_RESOLVER_REDIRECT,
@@ -15,6 +14,8 @@ import { TokenType } from './shared/injection/injection.types';
 import { GARDEN_NAVIGATION } from './modules/garden/garden.navigation';
 import { AppNavigationService } from './core/app-navigation/app-navigation.service';
 import { inject, Type } from '@angular/core';
+import { GardenListStoreService } from './modules/garden/stores/list/garden-list-store.service';
+import { GardenItemStoreService } from './modules/garden/stores/item/garden-item-store.service';
 
 export const appRoutes: Route[] = [
   {
@@ -35,7 +36,7 @@ export const appRoutes: Route[] = [
         path: '',
         pathMatch: 'full',
         providers: [
-          GardensListStore,
+          GardenListStoreService,
           {
             provide: GARDEN_LIST_RESOLVER_REDIRECT,
             useFactory: (): TokenType<typeof GARDEN_LIST_RESOLVER_REDIRECT> => {
@@ -54,6 +55,7 @@ export const appRoutes: Route[] = [
         path: ':id',
         pathMatch: 'full',
         providers: [
+          GardenItemStoreService,
           {
             provide: GARDEN_ITEM_RESOLVER_REDIRECT,
             useFactory: (): TokenType<typeof GARDEN_ITEM_RESOLVER_REDIRECT> => {
