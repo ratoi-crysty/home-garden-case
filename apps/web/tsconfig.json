@@ -4,8 +4,7 @@
     "noPropertyAccessFromIndexSignature": true,
     "experimentalDecorators": true,
     "module": "preserve",
-    "lib": ["es2022", "dom"],
-    "ignoreDeprecations": "6.0"
+    "lib": ["es2022", "dom"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
@@ -26,9 +25,7 @@
   ],
   "ts-node": {
     "compilerOptions": {
-      "module": "CommonJS",
-      "moduleResolution": "Node10",
-      "ignoreDeprecations": "6.0"
+      "module": "CommonJS"
     }
   }
 }

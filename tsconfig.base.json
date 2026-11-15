@@ -2,7 +2,6 @@
   "compileOnSave": false,
   "compilerOptions": {
     "rootDir": ".",
-    "baseUrl": ".",
     "sourceMap": true,
     "declaration": false,
     "importHelpers": true,
@@ -19,13 +18,11 @@
     "strict": true,
     "target": "es2022",
     "paths": {
-      "@itp-home-garden/api-interfaces": ["libs/api-interfaces/src/index.ts"],
-      "@itp-home-garden/schemas": ["libs/schemas/src/index.ts"]
+      "@itp-home-garden/api-interfaces": ["./libs/api-interfaces/src/index.ts"],
+      "@itp-home-garden/schemas": ["./libs/schemas/src/index.ts"]
     },
     "noUncheckedSideEffectImports": false,
-    "types": ["*"],
-    "esModuleInterop": false,
-    "ignoreDeprecations": "6.0"
+    "types": ["*"]
   },
   "exclude": ["node_modules", "tmp"]
 }
