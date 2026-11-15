@@ -1,6 +1,6 @@
 <mat-form-field>
   <mat-label>{{ label() }}</mat-label>
-  <input type="number" matInput [formField]="field()" />
+  <input type="number" step="any" matInput [formField]="field()" />
   @for (error of field()().errors(); track error.kind) {
     <mat-error>{{ error.message }}</mat-error>
   }

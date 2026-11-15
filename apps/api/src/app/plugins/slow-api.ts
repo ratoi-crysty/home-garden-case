@@ -6,7 +6,7 @@ import fp from 'fastify-plugin';
  * Useful for testing and development.
  */
 export default fp(async function (fastify: FastifyInstance) {
-  const enabled = true;
+  const enabled = process.env.API_SLOW !== 'false';
   const minDelay = 200;
   const maxDelay = 2000;
 

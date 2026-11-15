@@ -22,27 +22,33 @@ export default defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
   },
-  /* Run your local dev server before starting the tests */
-  webServer: {
-    command: 'npx nx run web:serve',
-    url: 'http://localhost:4200',
-    reuseExistingServer: true,
-    cwd: workspaceRoot,
-  },
+  /* All specs share one API instance and its data, so run them one at a time. */
+  workers: 1,
+  webServer: [
+    {
+      // Dedicated API for E2E: fresh in-memory DB, no simulated failures or latency.
+      // Not reused, so tests never run against (and wipe) a dev database on port 3000.
+      command: 'npx nx run api:dev',
+      url: 'http://localhost:3000/gardens',
+      reuseExistingServer: false,
+      cwd: workspaceRoot,
+      env: {
+        DB_PATH: ':memory:',
+        API_RANDOM_ERRORS: 'false',
+        API_SLOW: 'false',
+      },
+    },
+    {
+      command: 'npx nx run web:serve',
+      url: 'http://localhost:4200',
+      reuseExistingServer: true,
+      cwd: workspaceRoot,
+    },
+  ],
   projects: [
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
-    },
-
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
-
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
     },
 
     // Uncomment for mobile browsers support

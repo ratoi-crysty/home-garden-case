@@ -3,7 +3,7 @@ import { Kysely, SqliteDialect } from 'kysely';
 import { Database } from './types';
 
 const dialect = new SqliteDialect({
-  database: new SQLite('db.sqlite'),
+  database: new SQLite(process.env.DB_PATH ?? 'db.sqlite'),
 });
 
 export class DatabaseConnection {
