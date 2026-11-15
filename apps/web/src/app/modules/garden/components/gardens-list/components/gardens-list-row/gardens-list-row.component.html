@@ -1,0 +1,34 @@
+<mat-list-item>
+  <mat-icon matListItemIcon aria-hidden="true">yard</mat-icon>
+
+  <a matListItemTitle class="link" [routerLink]="link()">{{ garden().gardenName }}</a>
+  <span matListItemLine>
+    {{ garden().totalSurfaceArea | number: '1.0-2' }} m²
+    @if (garden().locationDescription; as location) {
+      · {{ location }}
+    }
+  </span>
+
+  <div matListItemMeta class="actions">
+    <button
+      matIconButton
+      type="button"
+      matTooltip="Edit"
+      [attr.aria-label]="'Edit ' + garden().gardenName"
+      [disabled]="disabled()"
+      (click)="edit.emit(garden())"
+    >
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button
+      matIconButton
+      type="button"
+      matTooltip="Delete"
+      [attr.aria-label]="'Delete ' + garden().gardenName"
+      [disabled]="disabled()"
+      (click)="remove.emit(garden())"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</mat-list-item>

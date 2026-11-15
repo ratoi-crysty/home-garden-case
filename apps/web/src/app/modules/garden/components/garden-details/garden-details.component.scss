@@ -1,0 +1,12 @@
+:host {
+  display: block;
+}
+
+// mat-card-avatar only sizes/rounds the slot; give the icon a tonal background.
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mat-sys-primary-container);
+  color: var(--mat-sys-on-primary-container);
+}

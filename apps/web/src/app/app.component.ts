@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
+import { AppShellComponent } from './core/components/app-shell/app-shell.component';
 
 @Component({
-  imports: [RouterModule],
+  imports: [RouterOutlet, AppShellComponent],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {}
+export class AppComponent {
+  protected readonly navItems = [{ label: 'Gardens', link: '/gardens', icon: 'yard' }];
+}

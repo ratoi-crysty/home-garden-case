@@ -1,0 +1,28 @@
+@if (gardens().length) {
+  <mat-card appearance="outlined">
+    <mat-list>
+      @for (garden of gardens(); track garden.gardenId; let last = $last) {
+        <app-gardens-list-row
+          [garden]="garden"
+          [disabled]="disabled()"
+          (edit)="edit.emit($event)"
+          (remove)="remove.emit($event)"
+        />
+        @if (!last) {
+          <mat-divider />
+        }
+      }
+    </mat-list>
+  </mat-card>
+} @else {
+  <app-empty-state
+    icon="yard"
+    title="No gardens yet"
+    message="Create your first garden to start tracking its surface, location and plants."
+  >
+    <button matButton="filled" type="button" [disabled]="disabled()" (click)="create.emit()">
+      <mat-icon>add</mat-icon>
+      Create garden
+    </button>
+  </app-empty-state>
+}

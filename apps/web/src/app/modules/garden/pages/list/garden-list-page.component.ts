@@ -1,19 +1,21 @@
-import { Component, inject, Injector, Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Injector, Signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { GardenFormComponent } from '../../components/garden-form/garden-form.component';
-import { GardensListStore, GardensListStoreLoading } from '../../stores/gardens-list.store';
-import { GardenListItemComponent } from '../../components/list-item/garden-list-item.component';
+import { GardensListStore } from '../../stores/gardens-list.store';
 import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { switchMap } from 'rxjs';
 import { CreateGardenRequest, GardenModel } from '@itp-home-garden/api-interfaces';
+import { PageLayoutComponent } from '../../../../shared/ui';
+import { GardensListComponent } from '../../components/gardens-list/gardens-list.component';
 
 @Component({
-  standalone: true,
-  selector: 'app-garden-web',
-  imports: [GardenListItemComponent, MatButton],
+  selector: 'app-garden-list-page',
+  imports: [PageLayoutComponent, GardensListComponent, MatButton, MatIcon],
   templateUrl: './garden-list-page.component.html',
-  styleUrl: './garden-list-page.component.css',
+  styleUrl: './garden-list-page.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GardenListPageComponent {
   protected readonly injector = inject(Injector);
@@ -22,7 +24,7 @@ export class GardenListPageComponent {
   protected readonly list: Signal<GardenModel[]> = toSignal<GardenModel[]>(this.store.getData(), {
     requireSync: true,
   });
-  protected readonly loading = toSignal<GardensListStoreLoading>(this.store.getLoading(), {
+  protected readonly isLoading: Signal<boolean> = toSignal<boolean>(this.store.getIsLoading(), {
     requireSync: true,
   });
 

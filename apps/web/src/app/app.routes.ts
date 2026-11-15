@@ -44,7 +44,7 @@ export const appRoutes: Route[] = [
             ({ GardenItemPageComponent }) => GardenItemPageComponent,
           ),
         resolve: {
-          list: gardenItemResolver,
+          garden: gardenItemResolver,
         },
       },
     ],

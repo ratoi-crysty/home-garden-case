@@ -1,1 +1,8 @@
-<p>garden-item-page works!</p>
+<app-page-layout
+  [title]="garden().gardenName"
+  subtitle="Garden details"
+  [backLink]="basePath"
+  backLabel="Back to gardens"
+>
+  <app-garden-details [garden]="garden()" />
+</app-page-layout>

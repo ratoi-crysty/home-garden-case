@@ -1,1 +1,10 @@
-<p>broken-page works!</p>
+<app-empty-state
+  icon="cloud_off"
+  title="Something went wrong"
+  message="We couldn't load the data. Please try again in a moment."
+>
+  <a matButton="filled" routerLink="/">
+    <mat-icon>refresh</mat-icon>
+    Try again
+  </a>
+</app-empty-state>

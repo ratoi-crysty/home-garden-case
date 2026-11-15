@@ -1,0 +1,43 @@
+// Page header layout + typography tokens; Material has no page-header component.
+:host {
+  display: block;
+}
+
+// Fixed-height slot so the progress bar does not shift content when it appears.
+.progress {
+  height: 4px;
+  margin-bottom: 12px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.titles {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.title {
+  margin: 0;
+  font: var(--mat-sys-headline-small);
+}
+
+.subtitle {
+  margin: 4px 0 0;
+  font: var(--mat-sys-body-medium);
+  color: var(--mat-sys-on-surface-variant);
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+
+  &:empty {
+    display: none;
+  }
+}

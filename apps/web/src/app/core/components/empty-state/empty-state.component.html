@@ -1,0 +1,8 @@
+<mat-icon class="icon" aria-hidden="true">{{ icon() }}</mat-icon>
+<h2 class="title">{{ title() }}</h2>
+@if (message()) {
+  <p class="message">{{ message() }}</p>
+}
+<div class="actions">
+  <ng-content />
+</div>

@@ -1,0 +1,11 @@
+<mat-list>
+  @for (item of items(); track item.label) {
+    <mat-list-item>
+      @if (item.icon) {
+        <mat-icon matListItemIcon aria-hidden="true">{{ item.icon }}</mat-icon>
+      }
+      <span matListItemTitle>{{ item.value ?? emptyValue() }}</span>
+      <span matListItemLine>{{ item.label }}</span>
+    </mat-list-item>
+  }
+</mat-list>

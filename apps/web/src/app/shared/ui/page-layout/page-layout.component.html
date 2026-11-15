@@ -1,0 +1,28 @@
+<div class="progress">
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" aria-label="Loading" />
+  }
+</div>
+
+<header class="header">
+  @if (backLink(); as link) {
+    <a matIconButton [routerLink]="link" [matTooltip]="backLabel()" [attr.aria-label]="backLabel()">
+      <mat-icon>arrow_back</mat-icon>
+    </a>
+  }
+
+  <div class="titles">
+    <h1 class="title">{{ title() }}</h1>
+    @if (subtitle()) {
+      <p class="subtitle">{{ subtitle() }}</p>
+    }
+  </div>
+
+  <div class="actions">
+    <ng-content select="[pageActions]" />
+  </div>
+</header>
+
+<section class="body">
+  <ng-content />
+</section>

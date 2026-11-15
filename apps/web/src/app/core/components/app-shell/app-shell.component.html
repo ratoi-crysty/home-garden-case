@@ -1,0 +1,31 @@
+<mat-toolbar class="toolbar">
+  <a class="brand" [routerLink]="homeLink()">
+    @if (icon()) {
+      <mat-icon aria-hidden="true">{{ icon() }}</mat-icon>
+    }
+    <span>{{ title() }}</span>
+  </a>
+
+  @if (navItems().length) {
+    <nav class="nav" aria-label="Main">
+      @for (item of navItems(); track item.link) {
+        <a
+          [matButton]="rla.isActive ? 'tonal' : 'text'"
+          [routerLink]="item.link"
+          routerLinkActive
+          #rla="routerLinkActive"
+          ariaCurrentWhenActive="page"
+        >
+          @if (item.icon) {
+            <mat-icon aria-hidden="true">{{ item.icon }}</mat-icon>
+          }
+          {{ item.label }}
+        </a>
+      }
+    </nav>
+  }
+</mat-toolbar>
+
+<main class="content">
+  <ng-content />
+</main>
