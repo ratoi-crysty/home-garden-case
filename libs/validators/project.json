@@ -1,0 +1,10 @@
+{
+  "name": "validators",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/validators/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project validators --web",
+  "targets": {}
+}

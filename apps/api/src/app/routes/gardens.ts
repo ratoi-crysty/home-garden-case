@@ -6,16 +6,16 @@ import {
   notFoundErrorResponseSchema,
   validationErrorResponseSchema,
 } from '../schemas/error.schema';
+import { emptyResponseSchema } from '../schemas/general.schema';
+import { GardenService } from '../services/garden.service';
 import {
   createGardenSchema,
   gardenIdParamsSchema,
   gardenResponseSchema,
   gardensResponseSchema,
   updateGardenSchema,
-} from '@itp-home-garden/schemas';
-import { emptyResponseSchema } from '../schemas/general.schema';
-import { GardenService } from '../services/garden.service';
-import { CreateGardenRequest } from '@itp-home-garden/api-interfaces';
+} from '@itp-home-garden/gardens-schema';
+import { CreateGardenRequest } from '@itp-home-garden/gardens-types';
 
 export default async function (fastify: FastifyInstance) {
   const gardenService = fastify.diContainer.resolve<GardenService>('gardenService');

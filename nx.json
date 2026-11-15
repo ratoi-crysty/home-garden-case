@@ -106,8 +106,13 @@
     "@nx/angular:directive": {
       "type": "directive"
     },
+    "@schematics/angular:service": {
+      "type": "service",
+      "injectable": true
+    },
     "@nx/angular:service": {
-      "type": "service"
+      "type": "service",
+      "injectable": true
     },
     "@nx/angular:guard": {
       "typeSeparator": "."

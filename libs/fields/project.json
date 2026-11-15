@@ -1,0 +1,10 @@
+{
+  "name": "fields",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/fields/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project fields --web",
+  "targets": {}
+}

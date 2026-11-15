@@ -1,8 +1,8 @@
 import { GardenRepository } from '../database/repositories/garden.repository';
 import { Garden, GardenUpdate, NewGarden } from '../database/types';
-import { createGardenSchema, updateGardenSchema } from '@itp-home-garden/schemas';
 import { NotFoundError } from '../shared/errors';
-import { CreateGardenRequest } from '@itp-home-garden/api-interfaces';
+import { createGardenSchema, updateGardenSchema } from '@itp-home-garden/gardens-schema';
+import { CreateGardenRequest } from '@itp-home-garden/gardens-types';
 
 export class GardenService {
   private readonly gardenRepository: GardenRepository;

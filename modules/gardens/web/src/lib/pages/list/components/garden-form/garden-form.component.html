@@ -1,0 +1,25 @@
+<mat-card>
+  <mat-card-header>{{ garden ? 'Update' : 'Create' }} garden</mat-card-header>
+  <mat-card-content>
+    <form action="" (submit)="handleSubmit($event)">
+      <div>
+        <lib-input-text label="gardenName" [field]="form.gardenName"></lib-input-text>
+      </div>
+      <div>
+        <lib-input-number label="totalSurfaceArea" [field]="form.totalSurfaceArea"></lib-input-number>
+      </div>
+      <div>
+        <lib-input-text label="locationDescription" [field]="form.locationDescription"></lib-input-text>
+      </div>
+      <div>
+        <lib-input-number label="latitude" [field]="form.latitude"></lib-input-number>
+      </div>
+      <div>
+        <lib-input-number label="longitude" [field]="form.longitude"></lib-input-number>
+      </div>
+      <div>
+        <button matButton [disabled]="loading()">Save</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

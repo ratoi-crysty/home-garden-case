@@ -8,7 +8,6 @@ import {
 } from '../schemas/error.schema';
 import { emptyResponseSchema } from '../schemas/general.schema';
 import {
-  gardenIdParamsSchema,
   createPlantSchema,
   plantIdParamsSchema,
   plantResponseSchema,
@@ -17,6 +16,7 @@ import {
 } from '@itp-home-garden/schemas';
 import { PlantService } from '../services/plant.service';
 import { CreatePlantRequest } from '@itp-home-garden/api-interfaces';
+import { gardenIdParamsSchema } from '@itp-home-garden/gardens-schema';
 
 export default async function (fastify: FastifyInstance) {
   const plantService = fastify.diContainer.resolve<PlantService>('plantService');

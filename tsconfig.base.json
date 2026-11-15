@@ -20,8 +20,18 @@
     "target": "es2022",
     "paths": {
       "@itp-home-garden/api-interfaces": ["libs/api-interfaces/src/index.ts"],
-      "@itp-home-garden/schemas": ["libs/schemas/src/index.ts"]
-    }
+      "@itp-home-garden/schemas": ["libs/schemas/src/index.ts"],
+      "@itp-home-garden/api-web": ["libs/api-web/src/index.ts"],
+      "@itp-home-garden/gardens-web": ["modules/gardens/web/src/index.ts"],
+      "@itp-home-garden/gardens-schema": ["modules/gardens/schemas/src/index.ts"],
+      "@itp-home-garden/gardens-types": ["modules/gardens/types/src/index.ts"],
+      "@itp-home-garden/validators": ["./libs/validators/src/index.ts"],
+      "@itp-home-garden/fields": ["./libs/fields/src/index.ts"]
+    },
+    "noUncheckedSideEffectImports": false,
+    "types": ["*"],
+    "esModuleInterop": false,
+    "ignoreDeprecations": "6.0"
   },
   "exclude": ["node_modules", "tmp"]
 }

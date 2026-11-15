@@ -1,11 +1,8 @@
-import { z } from 'zod/v4';
+import z from 'zod';
 
 export const gardenIdParamsSchema = z.object({
   gardenId: z.coerce.number().int().positive('GardenModel ID must be a positive integer'),
 });
-
-z.globalRegistry.add(gardenIdParamsSchema, { id: 'GardenId' });
-
 export const createGardenSchema = z
   .object({
     gardenName: z.string().min(1, 'GardenModel name is required').trim(),
@@ -35,21 +32,16 @@ export const createGardenSchema = z
       message: 'Both latitude and longitude must be provided together',
     },
   );
-
-z.globalRegistry.add(createGardenSchema, { id: 'CreateGarden' });
-
 export const updateGardenSchema = createGardenSchema;
-
-z.globalRegistry.add(updateGardenSchema, { id: 'UpdateGarden' });
-
 export const gardenResponseSchema = createGardenSchema.safeExtend({
   gardenId: z.number(),
   createdAt: z.coerce.string(),
   updatedAt: z.coerce.string(),
 });
-
-z.globalRegistry.add(gardenResponseSchema, { id: 'GardenModel' });
-
 export const gardensResponseSchema = z.array(gardenResponseSchema);
 
+z.globalRegistry.add(gardenIdParamsSchema, { id: 'GardenId' });
+z.globalRegistry.add(createGardenSchema, { id: 'CreateGarden' });
+z.globalRegistry.add(updateGardenSchema, { id: 'UpdateGarden' });
+z.globalRegistry.add(gardenResponseSchema, { id: 'GardenModel' });
 z.globalRegistry.add(gardensResponseSchema, { id: 'Gardens' });
