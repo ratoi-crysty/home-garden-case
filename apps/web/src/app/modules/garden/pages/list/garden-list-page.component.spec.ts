@@ -3,8 +3,16 @@ import { provideRouter } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { GardenModel } from '@itp-home-garden/api-interfaces';
 import { GardensListStore } from '../../stores/gardens-list.store';
-import { GARDEN_BASE_PATH } from '../../garden.navigation';
+import { GARDEN_NAVIGATION, GardenNavigation } from '../../garden.navigation';
 import { GardenListPageComponent } from './garden-list-page.component';
+import { TokenType } from '../../../../shared/injection/injection.types';
+
+const mockedNavigation: GardenNavigation = {
+  gardenList: () => '/gardens',
+  gardenItem: (id: string) => `/gardens/${id}`,
+  broken: () => '/broken',
+  notFound: () => `/notFound`,
+};
 
 class GardensListStoreStub implements Partial<GardensListStore> {
   readonly data$ = new BehaviorSubject<GardenModel[]>([]);
@@ -30,7 +38,10 @@ describe('GardenListPageComponent', () => {
       imports: [GardenListPageComponent],
       providers: [
         provideRouter([]),
-        { provide: GARDEN_BASE_PATH, useValue: '/gardens' },
+        {
+          provide: GARDEN_NAVIGATION,
+          useValue: mockedNavigation satisfies TokenType<typeof GARDEN_NAVIGATION>,
+        },
         { provide: GardensListStore, useValue: store },
       ],
     }).compileComponents();

@@ -11,12 +11,16 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { DirtyStateMatcherService } from './core/matcher/dirty-state-matcher.service';
 import { API_BASE_PATH } from './shared/api/api.const';
 import { LOG_LEVEL } from './shared/log/logger.service';
+import { TokenType } from './shared/injection/injection.types';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    { provide: LOG_LEVEL, useValue: '' },
+    { provide: LOG_LEVEL, useValue: environment.logLevel satisfies TokenType<typeof LOG_LEVEL> },
     { provide: ErrorStateMatcher, useClass: DirtyStateMatcherService },
-    { provide: API_BASE_PATH, useValue: environment.baseApi },
+    {
+      provide: API_BASE_PATH,
+      useValue: environment.baseApi satisfies TokenType<typeof API_BASE_PATH>,
+    },
     provideHttpClient(),
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),

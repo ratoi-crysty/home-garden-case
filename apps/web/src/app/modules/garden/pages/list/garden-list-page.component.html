@@ -3,16 +3,18 @@
   subtitle="All the gardens you are taking care of."
   [loading]="isLoading()"
 >
-  <button
-    pageActions
-    matButton="filled"
-    type="button"
-    [disabled]="isLoading()"
-    (click)="createNew()"
-  >
-    <mat-icon>add</mat-icon>
-    New garden
-  </button>
+  @if (list().length) {
+    <button
+      pageActions
+      matButton="filled"
+      type="button"
+      [disabled]="isLoading()"
+      (click)="createNew()"
+    >
+      <mat-icon>add</mat-icon>
+      New garden
+    </button>
+  }
 
   <app-gardens-list
     [gardens]="list()"

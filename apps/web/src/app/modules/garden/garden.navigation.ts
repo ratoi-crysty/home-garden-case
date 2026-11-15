@@ -1,7 +1,9 @@
 import { InjectionToken } from '@angular/core';
+import { CommonNavigation } from '../../shared/navigation/common.navigation';
 
-export const GARDEN_BASE_PATH = new InjectionToken<string>('gardens.base-path');
-export enum GardensPath {
-  List = '',
-  Item = ':id',
+export interface GardenNavigation extends CommonNavigation {
+  gardenList(): string[];
+  gardenItem(gardenId: string): string[];
 }
+
+export const GARDEN_NAVIGATION = new InjectionToken<GardenNavigation>('gardens.app-navigation');

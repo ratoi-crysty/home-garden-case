@@ -12,8 +12,7 @@ import {
   MatListItemTitle,
 } from '@angular/material/list';
 import { MatTooltip } from '@angular/material/tooltip';
-import { GARDEN_BASE_PATH, GardensPath } from '../../../../garden.navigation';
-import { buildRoute } from '../../../../../../shared/routing/routing.utils';
+import { GARDEN_NAVIGATION } from '../../../../garden.navigation';
 
 @Component({
   selector: 'app-gardens-list-row',
@@ -40,8 +39,8 @@ export class GardensListRowComponent {
   readonly edit = output<GardenModel>();
   readonly remove = output<GardenModel>();
 
-  protected readonly basePath = inject(GARDEN_BASE_PATH);
+  protected readonly gardenNavigation = inject(GARDEN_NAVIGATION);
   protected readonly link = computed(() =>
-    buildRoute([this.basePath, GardensPath.Item], { id: this.garden().gardenId.toString() }),
+    this.gardenNavigation.gardenItem(this.garden().gardenId.toString()),
   );
 }

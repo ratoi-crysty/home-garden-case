@@ -2,6 +2,15 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { GardenModel } from '@itp-home-garden/api-interfaces';
 import { GardensListComponent } from './gardens-list.component';
+import { GARDEN_NAVIGATION, GardenNavigation } from '../../garden.navigation';
+import { TokenType } from '../../../../shared/injection/injection.types';
+
+const mockedNavigation: GardenNavigation = {
+  gardenList: () => '/gardens',
+  gardenItem: (id: string) => ['/gardens', id],
+  broken: () => '/broken',
+  notFound: () => '/not-found',
+};
 
 const createGarden = (gardenId: number, gardenName: string): GardenModel => ({
   gardenId,
@@ -19,11 +28,16 @@ describe('GardensListComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [GardensListComponent],
-      providers: [provideRouter([])],
+      providers: [
+        provideRouter([]),
+        {
+          provide: GARDEN_NAVIGATION,
+          useValue: mockedNavigation satisfies TokenType<typeof GARDEN_NAVIGATION>,
+        },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(GardensListComponent);
-    fixture.componentRef.setInput('gardenLink', (garden: GardenModel) => ['/g', garden.gardenId]);
     element = fixture.nativeElement as HTMLElement;
   });
 
@@ -45,7 +59,7 @@ describe('GardensListComponent', () => {
 
     const rows = element.querySelectorAll('app-gardens-list-row');
     expect(rows).toHaveLength(2);
-    expect(rows[1].querySelector('a')?.getAttribute('href')).toBe('/g/2');
+    expect(rows[1].querySelector('a')?.getAttribute('href')).toBe('/gardens/2');
     expect(rows[1].textContent).toContain('South');
     expect(rows[1].textContent).toContain('Location 2');
     expect(element.querySelectorAll('mat-divider')).toHaveLength(1);

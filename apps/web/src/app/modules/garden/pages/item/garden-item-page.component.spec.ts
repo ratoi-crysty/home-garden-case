@@ -2,8 +2,15 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, provideRouter } from '@angular/router';
 import { of } from 'rxjs';
 import { GardenModel } from '@itp-home-garden/api-interfaces';
-import { GARDEN_BASE_PATH } from '../../garden.navigation';
 import { GardenItemPageComponent } from './garden-item-page.component';
+import { GARDEN_NAVIGATION, GardenNavigation } from '../../garden.navigation';
+
+const mockedNavigation: GardenNavigation = {
+  gardenList: () => '/gardens',
+  gardenItem: (id: string) => `/gardens/${id}`,
+  broken: () => '/broken',
+  notFound: () => `/notFound`,
+};
 
 describe('GardenItemPageComponent', () => {
   const garden: GardenModel = {
@@ -23,7 +30,10 @@ describe('GardenItemPageComponent', () => {
       imports: [GardenItemPageComponent],
       providers: [
         provideRouter([]),
-        { provide: GARDEN_BASE_PATH, useValue: '/gardens' },
+        {
+          provide: GARDEN_NAVIGATION,
+          useValue: mockedNavigation,
+        },
         { provide: ActivatedRoute, useValue: { data: of({ garden }) } },
       ],
     }).compileComponents();
