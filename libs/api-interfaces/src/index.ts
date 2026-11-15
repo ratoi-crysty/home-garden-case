@@ -1,2 +1,3 @@
-export type * from './lib/user.js';
-export type * from './lib/plant.js';
+export type * from './lib/user.types';
+export type * from './lib/garden.types';
+export type * from './lib/plant.types';

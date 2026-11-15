@@ -7,9 +7,9 @@ import { provideRouter } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { BASE_API_PATH } from '@itp-home-garden/api-web';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { DirtyStateMatcherService } from './forms/matcher/dirty-state-matcher.service';
+import { DirtyStateMatcherService } from './core/matcher/dirty-state-matcher.service';
+import { BASE_API_PATH } from './shared/api/api.const';
 
 export const appConfig: ApplicationConfig = {
   providers: [

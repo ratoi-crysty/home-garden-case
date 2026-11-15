@@ -1,0 +1,7 @@
+@for (garden of list(); track garden.gardenId) {
+  <app-garden-list-item [garden]="garden" (update)="update($event)" (remove)="remove($event)"></app-garden-list-item>
+}
+
+<div>
+  <button matButton (click)="createNew()">Create new</button>
+</div>

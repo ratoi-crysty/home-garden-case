@@ -1,6 +1,5 @@
-import { UserModel, PlantModel } from '@itp-home-garden/api-interfaces';
+import { UserModel, PlantModel, GardenModel } from '@itp-home-garden/api-interfaces';
 import { ColumnType, Generated, Insertable, Selectable, Updateable } from 'kysely';
-import { GardenModel } from '@itp-home-garden/gardens-types';
 
 export interface Database {
   user: UserTable;
