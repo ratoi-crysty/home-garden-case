@@ -59,7 +59,7 @@ export class GardenFormComponent {
     event.preventDefault();
 
     if (this.form().invalid()) {
-      console.log('Error', this.form().invalid());
+      return;
     }
 
     this.loading.set(true);

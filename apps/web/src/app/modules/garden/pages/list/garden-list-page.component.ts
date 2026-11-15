@@ -1,4 +1,4 @@
-import { Component, effect, inject, Injector, Signal } from '@angular/core';
+import { Component, inject, Injector, Signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { GardenFormComponent } from '../../components/garden-form/garden-form.component';
 import { GardensListStore, GardensListStoreLoading } from '../../stores/gardens-list.store';
@@ -25,12 +25,6 @@ export class GardenListPageComponent {
   protected readonly loading = toSignal<GardensListStoreLoading>(this.store.getLoading(), {
     requireSync: true,
   });
-
-  constructor() {
-    effect(() => {
-      console.log('List', { list: this.list() });
-    });
-  }
 
   protected openDialog(garden?: GardenModel) {
     const dialogRef: MatDialogRef<GardenFormComponent> = this.dialog.open(GardenFormComponent, {

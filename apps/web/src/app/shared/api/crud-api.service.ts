@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { BASE_API_PATH } from './api.const';
+import { API_BASE_PATH } from './api.const';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +9,7 @@ import { BASE_API_PATH } from './api.const';
 export abstract class CrudApiService<T, TC, TU, K extends string | number> {
   protected abstract readonly basePath: string;
 
-  protected readonly apiPath = inject(BASE_API_PATH);
+  protected readonly apiPath = inject(API_BASE_PATH);
   protected readonly http = inject(HttpClient);
 
   getAll(): Observable<T[]> {

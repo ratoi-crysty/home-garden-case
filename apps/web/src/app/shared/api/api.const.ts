@@ -1,3 +1,3 @@
 import { InjectionToken } from '@angular/core';
 
-export const BASE_API_PATH = new InjectionToken<string>('api-web.api-path');
+export const API_BASE_PATH = new InjectionToken<string>('api.base-path');
