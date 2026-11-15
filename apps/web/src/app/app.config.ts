@@ -5,13 +5,14 @@ import {
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { appRoutes } from './app.routes';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { DirtyStateMatcherService } from './core/matcher/dirty-state-matcher.service';
 import { API_BASE_PATH } from './shared/api/api.const';
 import { LOG_LEVEL } from './shared/log/logger.service';
 import { TokenType } from './shared/injection/injection.types';
+import { retryInterceptor } from './core/api/retry-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,7 +22,7 @@ export const appConfig: ApplicationConfig = {
       provide: API_BASE_PATH,
       useValue: environment.baseApi satisfies TokenType<typeof API_BASE_PATH>,
     },
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([retryInterceptor])),
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes),
