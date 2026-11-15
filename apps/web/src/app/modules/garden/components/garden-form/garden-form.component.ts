@@ -40,12 +40,12 @@ export class GardenFormComponent {
     this.formData,
     (schemaPath) => {
       required(schemaPath.gardenName, { message: 'Input is required' });
-      required(schemaPath.totalSurfaceArea);
+      required(schemaPath.totalSurfaceArea, { message: 'Input is required' });
       validate(schemaPath.totalSurfaceArea, integerValidator);
-      min(schemaPath.latitude, -90);
-      max(schemaPath.latitude, 90);
-      min(schemaPath.longitude, -180);
-      max(schemaPath.longitude, 180);
+      min(schemaPath.latitude, -90, { message: 'Input must be ≥ -90' });
+      max(schemaPath.latitude, 90, { message: 'Input must be ≤ 90' });
+      min(schemaPath.longitude, -180, { message: 'Input must be ≥ -180' });
+      max(schemaPath.longitude, 180, { message: 'Input must be ≤ 90' });
     },
   );
 

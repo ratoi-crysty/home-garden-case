@@ -1,7 +1,7 @@
 <mat-card>
   <mat-card-header>{{ garden ? 'Update' : 'Create' }} garden</mat-card-header>
   <mat-card-content>
-    <form action="" (submit)="handleSubmit($event)">
+    <form action="" (submit)="handleSubmit($event)" novalidate>
       <div>
         <app-input-text label="gardenName" [field]="form.gardenName"></app-input-text>
       </div>
