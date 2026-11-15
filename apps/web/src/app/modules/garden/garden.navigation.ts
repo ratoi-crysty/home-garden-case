@@ -6,4 +6,4 @@ export interface GardenNavigation extends CommonNavigation {
   gardenItem(gardenId: string): string[];
 }
 
-export const GARDEN_NAVIGATION = new InjectionToken<GardenNavigation>('gardens.app-navigation');
+export const GARDEN_NAVIGATION = new InjectionToken<GardenNavigation>('garden.app-navigation');

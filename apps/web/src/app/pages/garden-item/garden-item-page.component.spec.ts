@@ -1,10 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { of } from 'rxjs';
-import { GardenModel } from '@itp-home-garden/api-interfaces';
+import { GardenModel, PlantModel } from '@itp-home-garden/api-interfaces';
 import { GardenItemPageComponent } from './garden-item-page.component';
 import { GARDEN_NAVIGATION, GardenNavigation } from '../../modules/garden/garden.navigation';
 import { GardenItemStoreService } from '../../modules/garden/stores/item/garden-item-store.service';
+import { PlantListStoreService } from '../../modules/plant/stores/list/plant-list-store.service';
 
 const mockedNavigation: GardenNavigation = {
   gardenList: () => ['/gardens'],
@@ -24,6 +25,7 @@ describe('GardenItemPageComponent', () => {
     createdAt: '2026-01-02 10:00:00',
     updatedAt: '2026-01-03 10:00:00',
   };
+  const plants: PlantModel[] = [];
   let fixture: ComponentFixture<GardenItemPageComponent>;
 
   beforeEach(async () => {
@@ -38,6 +40,10 @@ describe('GardenItemPageComponent', () => {
         {
           provide: GardenItemStoreService,
           useValue: { getData: () => of(garden) } satisfies Partial<GardenItemStoreService>,
+        },
+        {
+          provide: PlantListStoreService,
+          useValue: { getData: () => of(plants) } satisfies Partial<PlantListStoreService>,
         },
       ],
     }).compileComponents();

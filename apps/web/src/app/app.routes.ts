@@ -1,21 +1,13 @@
 import { Route } from '@angular/router';
 import { GardenListPageComponent } from './pages/garden-list/garden-list-page.component';
-import {
-  GARDEN_LIST_RESOLVER_REDIRECT,
-  gardenListResolver,
-} from './modules/garden/resolvers/garden-list.resolver';
-import {
-  GARDEN_ITEM_RESOLVER_REDIRECT,
-  gardenItemResolver,
-} from './modules/garden/resolvers/garden-item.resolver';
+import { gardenListResolver } from './modules/garden/resolvers/garden-list.resolver';
+import { gardenItemResolver } from './modules/garden/resolvers/garden-item.resolver';
 import { NotFoundComponent } from './core/pages/not-found/not-found.component';
 import { BrokenPageComponent } from './core/pages/broken/broken-page.component';
-import { TokenType } from './shared/injection/injection.types';
-import { GARDEN_NAVIGATION } from './modules/garden/garden.navigation';
-import { AppNavigationService } from './core/app-navigation/app-navigation.service';
-import { inject, Type } from '@angular/core';
 import { GardenListStoreService } from './modules/garden/stores/list/garden-list-store.service';
 import { GardenItemStoreService } from './modules/garden/stores/item/garden-item-store.service';
+import { plantListResolver } from './modules/plant/resolvers/plant-list.resolver';
+import { PlantListStoreService } from './modules/plant/stores/list/plant-list-store.service';
 
 export const appRoutes: Route[] = [
   {
@@ -25,27 +17,11 @@ export const appRoutes: Route[] = [
   },
   {
     path: 'gardens',
-    providers: [
-      {
-        provide: GARDEN_NAVIGATION,
-        useExisting: AppNavigationService satisfies Type<TokenType<typeof GARDEN_NAVIGATION>>,
-      },
-    ],
     children: [
       {
         path: '',
         pathMatch: 'full',
-        providers: [
-          GardenListStoreService,
-          {
-            provide: GARDEN_LIST_RESOLVER_REDIRECT,
-            useFactory: (): TokenType<typeof GARDEN_LIST_RESOLVER_REDIRECT> => {
-              const navigation = inject(AppNavigationService);
-
-              return navigation.broken().join('/');
-            },
-          },
-        ],
+        providers: [GardenListStoreService],
         component: GardenListPageComponent,
         resolve: {
           list: gardenListResolver,
@@ -54,23 +30,14 @@ export const appRoutes: Route[] = [
       {
         path: ':id',
         pathMatch: 'full',
-        providers: [
-          GardenItemStoreService,
-          {
-            provide: GARDEN_ITEM_RESOLVER_REDIRECT,
-            useFactory: (): TokenType<typeof GARDEN_ITEM_RESOLVER_REDIRECT> => {
-              const navigation = inject(AppNavigationService);
-
-              return navigation.broken().join('/');
-            },
-          },
-        ],
+        providers: [GardenItemStoreService, PlantListStoreService],
         loadComponent: () =>
           import('./pages/garden-item/garden-item-page.component').then(
             ({ GardenItemPageComponent }) => GardenItemPageComponent,
           ),
         resolve: {
           garden: gardenItemResolver,
+          plantList: plantListResolver,
         },
       },
     ],

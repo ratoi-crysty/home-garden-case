@@ -2,6 +2,7 @@ import {
   ApplicationConfig,
   provideBrowserGlobalErrorListeners,
   provideZoneChangeDetection,
+  Type,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { appRoutes } from './app.routes';
@@ -13,6 +14,9 @@ import { API_BASE_PATH } from './shared/api/api.const';
 import { LOG_LEVEL } from './shared/log/logger.service';
 import { TokenType } from './shared/injection/injection.types';
 import { retryInterceptor } from './core/api/retry-interceptor';
+import { GARDEN_NAVIGATION } from './modules/garden/garden.navigation';
+import { AppNavigationService } from './core/app-navigation/app-navigation.service';
+import { PLANT_NAVIGATION } from './modules/plant/plant.navigation';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,6 +25,14 @@ export const appConfig: ApplicationConfig = {
     {
       provide: API_BASE_PATH,
       useValue: environment.baseApi satisfies TokenType<typeof API_BASE_PATH>,
+    },
+    {
+      provide: GARDEN_NAVIGATION,
+      useExisting: AppNavigationService satisfies Type<TokenType<typeof GARDEN_NAVIGATION>>,
+    },
+    {
+      provide: PLANT_NAVIGATION,
+      useExisting: AppNavigationService satisfies Type<TokenType<typeof GARDEN_NAVIGATION>>,
     },
     provideHttpClient(withInterceptors([retryInterceptor])),
     provideBrowserGlobalErrorListeners(),

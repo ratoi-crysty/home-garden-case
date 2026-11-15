@@ -12,10 +12,6 @@ export abstract class CrudApiService<T, TC, TU, K extends string | number> {
   protected readonly apiPath = inject(API_BASE_PATH);
   protected readonly http = inject(HttpClient);
 
-  getAll(): Observable<T[]> {
-    return this.http.get<T[]>(this.getAllUrl());
-  }
-
   getById(id: K): Observable<T> {
     return this.http.get<T>(this.getByIdUrl(id));
   }
@@ -30,10 +26,6 @@ export abstract class CrudApiService<T, TC, TU, K extends string | number> {
 
   remove(id: K): Observable<undefined> {
     return this.http.delete<undefined>(this.buildUrl(id.toString()));
-  }
-
-  getAllUrl() {
-    return this.buildUrl();
   }
 
   getByIdUrl(id: K) {
