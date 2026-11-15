@@ -24,8 +24,12 @@
       }
     </nav>
   }
+  <div class="loading-container">
+    @if (isNavigating()) {
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    }
+  </div>
 </mat-toolbar>
-
 <main class="content">
   <ng-content />
 </main>
