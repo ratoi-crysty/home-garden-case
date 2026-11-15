@@ -1,9 +1,20 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, InjectionToken } from '@angular/core';
 import { BehaviorSubject, catchError, EMPTY, filter, Observable, switchMap, tap } from 'rxjs';
 import { ApiSwrService } from '../swr/api-swr.service';
 import { SwrCacheDuration, SwrEntry } from '../swr/api-swr.types';
 import { LoggerService } from '../../log/logger.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+
+export const API_STORE_CACHE_DURATION = new InjectionToken<SwrCacheDuration>(
+  'api-store.cache-duration',
+  {
+    providedIn: 'root',
+    factory: () => ({
+      freshFor: 30_000,
+      maxStaleFor: 60_000 * 5,
+    }),
+  },
+);
 
 @Injectable()
 export abstract class ApiStoreService<T, R> {
@@ -12,6 +23,7 @@ export abstract class ApiStoreService<T, R> {
   protected readonly apiSwr = inject(ApiSwrService);
   protected readonly logger = inject(LoggerService);
   protected readonly snackBar = inject(MatSnackBar);
+  protected readonly defaultDuration = inject(API_STORE_CACHE_DURATION);
 
   reset() {
     this.data = new BehaviorSubject<T | undefined>(undefined);
@@ -75,10 +87,7 @@ export abstract class ApiStoreService<T, R> {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected getCacheDuration(_: R): SwrCacheDuration {
-    return {
-      freshFor: 30_000,
-      maxStaleFor: 60_000 * 5,
-    };
+    return this.defaultDuration;
   }
 
   protected getStaleWarnMessage(): string {
@@ -86,5 +95,6 @@ export abstract class ApiStoreService<T, R> {
   }
 
   protected abstract getCacheKey(req: R): string;
+
   protected abstract fetchData(req: R): Observable<T>;
 }
