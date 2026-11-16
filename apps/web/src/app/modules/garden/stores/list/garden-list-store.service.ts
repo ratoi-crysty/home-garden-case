@@ -6,7 +6,7 @@ import { GardenApiService } from '../../api/garden-api.service';
 
 @Injectable()
 export class GardenListStoreService extends ApiStoreService<GardenModel[], undefined> {
-  protected override name = 'garden-list';
+  protected override name = 'list';
   protected readonly gardensService = inject(GardenApiService);
 
   protected override getCacheKey(): string {

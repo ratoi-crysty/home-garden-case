@@ -12,10 +12,10 @@ import {
   MatListItemTitle,
 } from '@angular/material/list';
 import { MatTooltip } from '@angular/material/tooltip';
-import { GARDEN_NAVIGATION } from '../../../../garden.navigation';
+import { GARDEN_NAVIGATION } from '../../../garden.navigation';
 
 @Component({
-  selector: 'app-gardens-list-row',
+  selector: 'app-garden-list-row',
   imports: [
     DecimalPipe,
     RouterLink,
@@ -28,11 +28,11 @@ import { GARDEN_NAVIGATION } from '../../../../garden.navigation';
     MatIcon,
     MatTooltip,
   ],
-  templateUrl: './gardens-list-row.component.html',
-  styleUrl: './gardens-list-row.component.scss',
+  templateUrl: './garden-list-row.component.html',
+  styleUrl: './garden-list-row.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GardensListRowComponent {
+export class GardenListRowComponent {
   readonly garden = input.required<GardenModel>();
   readonly disabled = input<boolean>(false);
 

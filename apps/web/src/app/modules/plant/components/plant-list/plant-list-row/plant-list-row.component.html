@@ -1,0 +1,48 @@
+<mat-list-item>
+  <mat-icon matListItemIcon aria-hidden="true">
+    @switch (plant().plantType) {
+      @case ('vegetable') {
+        eco
+      }
+      @case ('fruit') {
+        nutrition
+      }
+      @default {
+        local_florist
+      }
+    }
+  </mat-icon>
+
+  <span matListItemTitle>{{ plant().plantName }}</span>
+  <span matListItemLine>
+    <em>{{ plant().species }}</em> · {{ plant().plantType | titlecase }}
+  </span>
+  <span matListItemLine>
+    {{ plant().surfaceAreaRequired | number: '1.0-2' }} m² ·
+    {{ plant().idealHumidityLevel | number: '1.0-0' }}% humidity · planted
+    {{ plant().plantationDate | date: 'mediumDate' : 'UTC' }}
+  </span>
+
+  <div matListItemMeta class="actions">
+    <button
+      matIconButton
+      type="button"
+      matTooltip="Edit"
+      [attr.aria-label]="'Edit ' + plant().plantName"
+      [disabled]="disabled()"
+      (click)="handleUpdate()"
+    >
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button
+      matIconButton
+      type="button"
+      matTooltip="Delete"
+      [attr.aria-label]="'Delete ' + plant().plantName"
+      [disabled]="disabled()"
+      (click)="handleRemove()"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</mat-list-item>

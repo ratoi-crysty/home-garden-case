@@ -5,5 +5,11 @@
   backLabel="Back to gardens"
 >
   <app-garden-details [garden]="garden()" />
-  <app-plant-list [plants]="plants()"></app-plant-list>
+  <app-plant-list
+    [plants]="plants()"
+    [disabled]="isLoading()"
+    (create)="createNew()"
+    (update)="update($event)"
+    (remove)="remove($event)"
+  ></app-plant-list>
 </app-page-layout>

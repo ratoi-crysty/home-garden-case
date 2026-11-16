@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, effect, inject, output, signal } from '@angular/core';
-import { form, max, min, required, validate } from '@angular/forms/signals';
+import { form, validateStandardSchema } from '@angular/forms/signals';
 import { MatButton } from '@angular/material/button';
 import { MatCard, MatCardContent, MatCardHeader } from '@angular/material/card';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CreateGardenRequest, GardenModel } from '@itp-home-garden/api-interfaces';
 import { InputTextComponent } from '../../../../shared/fields/input-text/input-text.component';
 import { InputNumberComponent } from '../../../../shared/fields/input-number/input-number.component';
-import { integerValidator } from '../../../../shared/validators/integer.validator';
+import { createGardenSchema } from '@itp-home-garden/schemas';
 
 type NonNullableProps<T> = {
   [K in keyof T]-?: NonNullable<T[K]>;
@@ -34,18 +34,12 @@ export class GardenFormComponent {
     this.getFormData(this.garden),
   );
 
-  save = output<CreateGardenRequest>();
+  readonly save = output<CreateGardenRequest>();
 
   protected readonly form = form<NonNullableProps<CreateGardenRequest>>(
     this.formData,
     (schemaPath) => {
-      required(schemaPath.gardenName, { message: 'Input is required' });
-      required(schemaPath.totalSurfaceArea, { message: 'Input is required' });
-      validate(schemaPath.totalSurfaceArea, integerValidator);
-      min(schemaPath.latitude, -90, { message: 'Input must be ≥ -90' });
-      max(schemaPath.latitude, 90, { message: 'Input must be ≤ 90' });
-      min(schemaPath.longitude, -180, { message: 'Input must be ≥ -180' });
-      max(schemaPath.longitude, 180, { message: 'Input must be ≤ 90' });
+      validateStandardSchema(schemaPath, createGardenSchema);
     },
   );
 
@@ -55,8 +49,13 @@ export class GardenFormComponent {
     });
   }
 
-  handleSubmit(event: SubmitEvent) {
+  cancelLoading() {
+    this.loading.set(false);
+  }
+
+  protected handleSubmit(event: SubmitEvent) {
     event.preventDefault();
+    this.form().markAsTouched();
 
     if (this.form().invalid()) {
       return;
@@ -64,10 +63,6 @@ export class GardenFormComponent {
 
     this.loading.set(true);
     this.save.emit(this.formData());
-  }
-
-  cancelLoading() {
-    this.loading.set(false);
   }
 
   protected getFormData(garden: GardenModel | undefined): NonNullableProps<CreateGardenRequest> {

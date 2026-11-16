@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideRouter } from '@angular/router';
 import { of } from 'rxjs';
 import { GardenModel, PlantModel } from '@itp-home-garden/api-interfaces';
@@ -6,6 +8,7 @@ import { GardenItemPageComponent } from './garden-item-page.component';
 import { GARDEN_NAVIGATION, GardenNavigation } from '../../modules/garden/garden.navigation';
 import { GardenItemStoreService } from '../../modules/garden/stores/item/garden-item-store.service';
 import { PlantListStoreService } from '../../modules/plant/stores/list/plant-list-store.service';
+import { API_BASE_PATH } from '../../shared/api/api.const';
 
 const mockedNavigation: GardenNavigation = {
   gardenList: () => ['/gardens'],
@@ -33,6 +36,9 @@ describe('GardenItemPageComponent', () => {
       imports: [GardenItemPageComponent],
       providers: [
         provideRouter([]),
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        { provide: API_BASE_PATH, useValue: '/api' },
         {
           provide: GARDEN_NAVIGATION,
           useValue: mockedNavigation,

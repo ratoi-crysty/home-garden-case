@@ -1,0 +1,40 @@
+<section class="plants">
+  <header class="header">
+    <h2 class="mat-title-large">Plants</h2>
+    @if (plants().length) {
+      <button matButton="tonal" type="button" [disabled]="disabled()" (click)="create.emit()">
+        <mat-icon>add</mat-icon>
+        Add plant
+      </button>
+    }
+  </header>
+
+  @if (plants().length) {
+    <mat-card appearance="outlined">
+      <mat-list>
+        @for (plant of plants(); track plant.plantId; let last = $last) {
+          <app-plant-list-row
+            [plant]="plant"
+            [disabled]="disabled()"
+            (update)="update.emit($event)"
+            (remove)="remove.emit($event)"
+          />
+          @if (!last) {
+            <mat-divider />
+          }
+        }
+      </mat-list>
+    </mat-card>
+  } @else {
+    <app-empty-state
+      icon="potted_plant"
+      title="No plants yet"
+      message="Add the first plant to this garden to track its species, space and humidity needs."
+    >
+      <button matButton="filled" type="button" [disabled]="disabled()" (click)="create.emit()">
+        <mat-icon>add</mat-icon>
+        Add plant
+      </button>
+    </app-empty-state>
+  }
+</section>

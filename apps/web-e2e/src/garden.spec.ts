@@ -27,7 +27,7 @@ const updated: GardenFormValues = {
   locationDescription: 'Near the river',
 };
 
-/** Removes leftovers (e.g. from a failed run in another browser project) so the list starts empty. */
+/** Removes leftovers (e.g. from a failed run in another browser project) so the garden-list starts empty. */
 async function deleteAllGardens(request: APIRequestContext): Promise<void> {
   const response: APIResponse = await request.get('/api/gardens');
   expect(response.ok()).toBe(true);
@@ -90,7 +90,7 @@ test('creates, views, edits and deletes a garden', async ({ page }) => {
   await gardenLink(page, created.gardenName).click();
   await expectGardenDetails(page, created);
 
-  // Edit (the item page is read-only, so editing happens from the list)
+  // Edit (the item page is read-only, so editing happens from the garden-list)
   await page.getByRole('link', { name: 'Back to gardens' }).click();
   await page.getByRole('button', { name: `Edit ${created.gardenName}` }).click();
   await fillAndSaveGardenForm(page, updated);

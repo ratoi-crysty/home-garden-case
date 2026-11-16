@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { GardenModel } from '@itp-home-garden/api-interfaces';
-import { GardensListComponent } from './gardens-list.component';
+import { GardenListComponent } from './garden-list.component';
 import { GARDEN_NAVIGATION, GardenNavigation } from '../../garden.navigation';
 import { TokenType } from '../../../../shared/injection/injection.types';
 
@@ -21,13 +21,13 @@ const createGarden = (gardenId: number, gardenName: string): GardenModel => ({
   updatedAt: '2026-01-01 00:00:00',
 });
 
-describe('GardensListComponent', () => {
-  let fixture: ComponentFixture<GardensListComponent>;
+describe('GardenListComponent', () => {
+  let fixture: ComponentFixture<GardenListComponent>;
   let element: HTMLElement;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GardensListComponent],
+      imports: [GardenListComponent],
       providers: [
         provideRouter([]),
         {
@@ -37,7 +37,7 @@ describe('GardensListComponent', () => {
       ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(GardensListComponent);
+    fixture = TestBed.createComponent(GardenListComponent);
     element = fixture.nativeElement as HTMLElement;
   });
 
@@ -53,11 +53,11 @@ describe('GardensListComponent', () => {
     expect(create).toHaveBeenCalledTimes(1);
   });
 
-  it('should render one row per garden with link and summary', async () => {
+  it('should render one garden-list-row per garden with link and summary', async () => {
     fixture.componentRef.setInput('gardens', [createGarden(1, 'North'), createGarden(2, 'South')]);
     await fixture.whenStable();
 
-    const rows = element.querySelectorAll('app-gardens-list-row');
+    const rows = element.querySelectorAll('app-garden-list-row');
     expect(rows).toHaveLength(2);
     expect(rows[1].querySelector('a')?.getAttribute('href')).toBe('/gardens/2');
     expect(rows[1].textContent).toContain('South');
@@ -81,12 +81,12 @@ describe('GardensListComponent', () => {
     expect(remove).toHaveBeenCalledWith(garden);
   });
 
-  it('should disable row actions when disabled', async () => {
+  it('should disable garden-list-row actions when disabled', async () => {
     fixture.componentRef.setInput('gardens', [createGarden(1, 'North')]);
     fixture.componentRef.setInput('disabled', true);
     await fixture.whenStable();
 
-    const buttons = element.querySelectorAll<HTMLButtonElement>('app-gardens-list-row button');
+    const buttons = element.querySelectorAll<HTMLButtonElement>('app-garden-list-row button');
     expect([...buttons].every((button: HTMLButtonElement) => button.disabled)).toBe(true);
   });
 });

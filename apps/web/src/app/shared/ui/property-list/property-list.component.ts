@@ -9,7 +9,7 @@ import {
 } from '@angular/material/list';
 import { PropertyListItem } from './models/property-list-item.model';
 
-/** Read-only label/value pairs rendered as a Material list. */
+/** Read-only label/value pairs rendered as a Material garden-list. */
 @Component({
   selector: 'app-property-list',
   imports: [MatList, MatListItem, MatListItemIcon, MatListItemTitle, MatListItemLine, MatIcon],
