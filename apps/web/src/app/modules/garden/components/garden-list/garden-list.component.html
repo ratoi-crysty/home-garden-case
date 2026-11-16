@@ -2,7 +2,7 @@
   <mat-card appearance="outlined">
     <mat-list>
       @for (garden of gardens(); track garden.gardenId; let last = $last) {
-        <app-gardens-list-row
+        <app-garden-list-row
           [garden]="garden"
           [disabled]="disabled()"
           (edit)="edit.emit($event)"

@@ -35,6 +35,7 @@ describe('PlantListComponent', () => {
     fixture = TestBed.createComponent(PlantListComponent);
     component = fixture.componentInstance;
     fixture.componentRef.setInput('plants', []);
+    fixture.componentRef.setInput('disabled', false);
     await fixture.whenStable();
   });
 

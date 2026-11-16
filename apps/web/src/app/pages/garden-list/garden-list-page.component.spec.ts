@@ -76,8 +76,6 @@ describe('GardenListPageComponent', () => {
     const element = fixture.nativeElement as HTMLElement;
 
     expect(element.querySelector('[pageActions]')?.textContent).toContain('New garden');
-    expect(element.querySelector('app-gardens-list-row a')?.getAttribute('href')).toBe(
-      '/gardens/3',
-    );
+    expect(element.querySelector('app-garden-list-row a')?.getAttribute('href')).toBe('/gardens/3');
   });
 });

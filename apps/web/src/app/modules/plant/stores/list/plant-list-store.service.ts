@@ -7,7 +7,7 @@ import { GardenApiService } from '../../../garden/api/garden-api.service';
 
 @Injectable()
 export class PlantListStoreService extends ApiStoreService<PlantModel[], number> {
-  protected override name = 'plant-list';
+  protected override name = 'plant-garden-list';
   protected readonly plantApi = inject(PlantApiService);
   protected readonly gardenApi = inject(GardenApiService);
 
